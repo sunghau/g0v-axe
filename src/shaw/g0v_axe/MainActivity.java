@@ -1,6 +1,9 @@
 package shaw.g0v_axe;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -13,8 +16,8 @@ import org.jsoup.select.Elements;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -86,15 +89,21 @@ public class MainActivity extends Activity {
 								JSONObject jsonObject = new JSONObject();
 								jsonObject.put("name", tds.get(0).text());
 								tds.remove(0);
-								JSONArray jsonArray = new JSONArray();
 								JSONObject gradeObject = new JSONObject();
 								for (int i = 0; i < tds.size(); i++) {
-									gradeObject.put(field[i], tds.get(i).text());
+									gradeObject.put(field[i], Integer.valueOf(tds.get(i).text()));
 								}
-								jsonArray.put(gradeObject);
-								jsonObject.put("grades", jsonArray);
+								jsonObject.put("grades", gradeObject);
 								resultArray.put(jsonObject);
 							}
+
+							File myFile = new File("/sdcard/answer1.txt");
+				            myFile.createNewFile();
+				            FileOutputStream fOut = new FileOutputStream(myFile);
+							OutputStreamWriter outputStreamWriter = new OutputStreamWriter(fOut);
+							outputStreamWriter.write(resultArray.toString());
+							outputStreamWriter.close();
+							fOut.close();
 
 							getActivity().runOnUiThread(new Runnable() {
 
@@ -142,7 +151,15 @@ public class MainActivity extends Activity {
 									resultArray.put(jsonObject);
 								}
 							}
-
+							
+							File myFile = new File("/sdcard/answer2.txt");
+				            myFile.createNewFile();
+				            FileOutputStream fOut = new FileOutputStream(myFile);
+							OutputStreamWriter outputStreamWriter = new OutputStreamWriter(fOut);
+							outputStreamWriter.write(resultArray.toString());
+							outputStreamWriter.close();
+							fOut.close();
+							
 							getActivity().runOnUiThread(new Runnable() {
 
 								@Override
@@ -191,6 +208,14 @@ public class MainActivity extends Activity {
 								jsonObject.put("name", tds.get(2).text());
 								resultArray.put(jsonObject);
 							}
+
+							File myFile = new File("/sdcard/answer3.txt");
+				            myFile.createNewFile();
+				            FileOutputStream fOut = new FileOutputStream(myFile);
+							OutputStreamWriter outputStreamWriter = new OutputStreamWriter(fOut);
+							outputStreamWriter.write(resultArray.toString());
+							outputStreamWriter.close();
+							fOut.close();
 
 							getActivity().runOnUiThread(new Runnable() {
 
@@ -243,6 +268,14 @@ public class MainActivity extends Activity {
 								}
 							}
 
+							File myFile = new File("/sdcard/answer4.txt");
+				            myFile.createNewFile();
+				            FileOutputStream fOut = new FileOutputStream(myFile);
+							OutputStreamWriter outputStreamWriter = new OutputStreamWriter(fOut);
+							outputStreamWriter.write(resultArray.toString());
+							outputStreamWriter.close();
+							fOut.close();
+							
 							getActivity().runOnUiThread(new Runnable() {
 
 								@Override
